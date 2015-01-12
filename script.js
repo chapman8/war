@@ -44,17 +44,42 @@ $(document).ready(function() {
 	}
 	
 	//Now call the shuffle function and save the result of what shuffle returns into your deck variable
+	deck = shuffle(deck);
+
 	
 	var cards_player_1 = [];
 	var cards_player_2 = [];
-	// write a function called deal that will evently divide the deck up between the two players
+	// write a function called deal that will evenly divide the deck up between the two players
+	// var deal = function (array) {
+	// 	for (var i = 0; i < array.length; i += 2) {
+	// 		cards_player_1.push(deck[i]);
+	// 		cards_player_2.push(deck[i + 1])
+	// 	}
+	// };
+
+	var deal = function (array) {
+		for (var i = 0; i < array.length; i = i + 2) {
+			cards_player_1.push(deck[i]);
+			cards_player_2.push(deck[i + 1])
+		}
+	};
 	
-	
+	deal(deck);
+
 	//create a function (algorithm) called "war" that takes two cards as parameters, compares them and returns a winner. A tie should return false.
-	var war = function(){
-	
-		
-	}
+	var war = function(card1, card2){
+		// console.log(card1);
+		// console.log(card2);
+		if (card1.number > card2.number) {
+			return card1;
+		};
+		if (card2.number > card1.number) {
+			return card2;
+		};
+		if (card1.number === card2.number) {
+			return false;
+		};
+	};
 	
 	var advance = function(){
 		//take the top two cards and display them
@@ -74,7 +99,27 @@ $(document).ready(function() {
 		//compare the cards
 		//give the winner both cards (at end of deck)
 	var play = function(){
-		
+		var card1 = cards_player_1[0];
+		var card2 = cards_player_2[0];
+		var winner = war(card1, card2);
+		console.log(winner);
+		if (winner.number === card1.number) {
+			cards_player_1.push(card1, card2);
+			cards_player_1.shift();
+			cards_player_2.shift();
+		}
+		if (winner.number === card2.number) {
+			cards_player_2.push(card1, card2)
+			cards_player_1.shift();
+			cards_player_2.shift();
+		}
+		if (winner === false) {
+			cards_player_1.push(card1);
+		  	cards_player_2.push(card2);
+		  	cards_player_1.shift();
+		  	cards_player_2.shift();
+		}
+
 		//this function (defined below) will continue to the next turn
 		advance();
 	}
