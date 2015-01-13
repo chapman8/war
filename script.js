@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
 	//what does this do?
+		//Converts value > 10 to a card name
 	var convert_value_to_string = function(value) {
 		if (value > 10) {
 			switch (value) {
@@ -19,6 +20,7 @@ $(document).ready(function() {
 	}
 
 	//what does this do?
+		//Creates a Deck of cards
 	var deck = [];
 	var suits = ['hearts', 'diamonds', 'spades', 'clubs'];
 	for (var i = 0; i<suits.length; i++) {
@@ -29,6 +31,8 @@ $(document).ready(function() {
 	}
 	
 	//what does this do?
+		//Creates a function that shuffles cards. The while loop finds a random card pushes it into a new array
+		// in that certain spot and stops when n = false. Essentially shuffles the deck.
 	var shuffle = function(array) { 
 		var copy = [];
 		var n = array.length; 
@@ -63,6 +67,13 @@ $(document).ready(function() {
 			cards_player_2.push(deck[i + 1])
 		}
 	};
+
+	/* OR
+	var deal = function(array) {
+	  cards_player_2 = array.slice(0, array,length/2);
+	  cards_player_1 = array.slice(0, array,length/2);
+	}
+	*/
 	
 	deal(deck);
 
@@ -99,8 +110,8 @@ $(document).ready(function() {
 		//compare the cards
 		//give the winner both cards (at end of deck)
 	var play = function(){
-		var card1 = cards_player_1[0];
-		var card2 = cards_player_2[0];
+		var card1 = cards_player_1[0]; //or var card1 = cards_player_1.shift(); - then dont need shift in if statements.
+		var card2 = cards_player_2[0]; //or var card1 = cards_player_2.shift();
 		var winner = war(card1, card2);
 		console.log(winner);
 		if (winner.number === card1.number) {
