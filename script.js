@@ -114,10 +114,14 @@ $(document).ready(function() {
 			cards_player_2.shift();
 		}
 		if (winner === false) {
-			cards_player_1.push(card1);
-		  	cards_player_2.push(card2);
-		  	cards_player_1.shift();
-		  	cards_player_2.shift();
+			if (cards_player_1[3].number > cards_player_2[3].number) {
+				cards_player_1.push(card1, card2, cards_player_1[1], cards_player_1[2], cards_player_1[3], cards_player_2[1], cards_player_2[2], cards_player_2[3]);
+			}
+			if (cards_player_1[3].number < cards_player_2[3].number) {
+				cards_player_2.push(card1, card2, cards_player_1[1], cards_player_1[2], cards_player_1[3], cards_player_2[1], cards_player_2[2], cards_player_2[3]);
+			}
+			cards_player_1.splice(0,4);
+		  	cards_player_2.splice(0,4);
 		}
 
 		//this function (defined below) will continue to the next turn
